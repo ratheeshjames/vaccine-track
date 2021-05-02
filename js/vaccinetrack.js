@@ -7,9 +7,13 @@ if ("serviceWorker" in navigator) {
       console.log("Service Worker Registered");
     });
 }
+// Initialize deferredPrompt for use later to show browser install prompt.
+
+
 $(document).ready(function () {
+  $("#install_btn").hide();
   $("#stop_btn").hide();
-  $("#bar").hide();   
+  $("#bar").hide();
   // jQuery methods go here...
 
   function notifyMe(data) {
@@ -44,7 +48,7 @@ $(document).ready(function () {
   $("#enquire_btn").click(function () {
     $("#enquire_btn").hide();
     $("#stop_btn").show();
-    $("#bar").show();    
+    $("#bar").show();
     var dist = $("#dist").val();
     notifyMe("Notification Alerts are Enabled!");
     var today = new Date();
@@ -120,4 +124,43 @@ $(document).ready(function () {
 
     e.preventDefault();
   });
+});
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the mini-infobar from appearing on mobile
+  e.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  // Update UI notify the user they can install the PWA
+  showInstallPromotion();  
+  // Optionally, send analytics event that PWA install promo was shown.
+  console.log(`'beforeinstallprompt' event was fired.`);
+});
+function showInstallPromotion () {
+  $("#install_btn").show();
+}
+function hideInstallPromotion () {
+  $("#install_btn").hide();
+}
+document.getElementById("install_btn").addEventListener('click', async () => {
+  // Hide the app provided install promotion
+  hideInstallPromotion();
+  // Show the install prompt
+  deferredPrompt.prompt();
+  // Wait for the user to respond to the prompt
+  const { outcome } = await deferredPrompt.userChoice;
+  // Optionally, send analytics event with outcome of user choice
+  console.log(`User response to the install prompt: ${outcome}`);
+  // We've used the prompt, and can't use it again, throw it away
+  deferredPrompt = null;
+});
+
+window.addEventListener('appinstalled', () => {
+  // Hide the app-provided install promotion
+  hideInstallPromotion();
+  // Clear the deferredPrompt so it can be garbage collected
+  deferredPrompt = null;
+  // Optionally, send analytics event to indicate successful install
+  console.log('PWA was installed');
 });
