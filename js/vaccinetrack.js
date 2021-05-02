@@ -15,6 +15,7 @@ $(document).ready(function () {
   $("#bar").hide();
   $(".result").hide();
   $(".dateCurrent").hide();
+
   // jQuery methods go here...
   var audio = document.getElementById("notification");
   function playAudio() {
@@ -30,6 +31,7 @@ $(document).ready(function () {
     $("#bar").show();
     $(".result").show();
     $(".dateCurrent").show();
+
     var dist = $("#dist").val();
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
@@ -40,7 +42,8 @@ $(document).ready(function () {
     var ddTemp = dd;
     runVaccine();
     var flag = 0;
-    interval = setInterval(runVaccine, 3000);
+    var count = 0;
+    interval = setInterval(runVaccine, 2000);
     function runVaccine() {
       $(".runStatus").text("Running...");
       var dateVar = ddTemp + "-" + mm + "-" + yyyy;
@@ -81,8 +84,11 @@ $(document).ready(function () {
           $(".result").css("background-color", "LightPink");
         }
       });
+      var portion = Math.round((count / 14) * 100);
+
       ddTemp++;
       flag++;
+      count++;
       if (ddTemp > 30) {
         ddTemp = 1;
       } else {
