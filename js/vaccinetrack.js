@@ -14,6 +14,7 @@ $(document).ready(function () {
   $("#install_btn").hide();
   $("#stop_btn").hide();
   $("#bar").hide();
+  $(".result").hide();
   // jQuery methods go here...
   var audio = document.getElementById("notification"); 
   function playAudio() { 
@@ -27,6 +28,7 @@ $(document).ready(function () {
     $("#enquire_btn").hide();
     $("#stop_btn").show();
     $("#bar").show();
+    $(".result").show();
     var dist = $("#dist").val();    
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
@@ -37,7 +39,7 @@ $(document).ready(function () {
     var ddTemp = dd;
     runVaccine();
     var flag = 0;
-    interval = setInterval(runVaccine, 1000);
+    interval = setInterval(runVaccine, 3000);
     function runVaccine() {
       $(".runStatus").text("Running...");
       var dateVar = ddTemp + "-" + mm + "-" + yyyy;
@@ -94,8 +96,8 @@ $(document).ready(function () {
     $("#stop_btn").hide();
     $("#enquire_btn").show();
     $("#bar").hide();
-    $(".result").text(" ");
-    $(".result").css("background-color", "White");
+    $(".result").hide();
+    $(".result").text(" ");    
     $(".date").text(" ");
     $(".runStatus").text("Stopped");
 
