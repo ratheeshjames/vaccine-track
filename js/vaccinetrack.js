@@ -39,7 +39,7 @@ $(document).ready(function () {
     var ddTemp = dd;
     runVaccine();
     var flag = 0;
-    interval = setInterval(runVaccine, 3000);
+    interval = setInterval(runVaccine, 1000);
     function runVaccine() {
       $(".runStatus").text("Running...");
       var dateVar = ddTemp + "-" + mm + "-" + yyyy;
@@ -62,9 +62,10 @@ $(document).ready(function () {
       $.getJSON(vaccineDataLink, function (json) {
         console.log("JSON Fetch succesful!!  Date:  " + dateVar);
         vaccineData = JSON.stringify(json);
-        totalOccur = vaccineData.match(/district_name/g).length;
+        totalOccur = vaccineData.match(/slots/g).length;
         console.log("Total Centers = " + totalOccur);
         var nAvailable = vaccineData.match(/"available_capacity":0/g).length;
+        console.log("Total Zero Centers = " + nAvailable);
         available = Math.abs(totalOccur - nAvailable);
         console.log("Available Centers = " + available);
         if (available != 0) {          
