@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Vaccine Track</title>
+    <meta name="COWIN" content="The HTML5 Herald" />
+    <meta name="Ratheesh James" content="SitePoint" />
+
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/onsenui/css/onsen-css-components.min.css"
+    />
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>  
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/vaccinetrack.js"></script>
+    <link rel="manifest" href="manifest.json" />
+<!-- ios support -->
+<link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+<link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+<meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+<meta name="theme-color" content="#db4938" />
+  </head>
+
+  <body>
+    <ons-page id="main-page">
+      <ons-toolbar>
+        <div class="center">Kerala Vaccine Track</div>
+      </ons-toolbar>
+      <ons-progress-bar indeterminate id="bar"></ons-progress-bar>
+      <section style="padding: 16px">
+        <!-- Your page content here. -->        
+        <p>Select District</p>
+        <p></p>
+        <div>
+          <form>
+            <ons-select id="dist">
+              <option value="301">Alapuzha</option>
+              <option value="307">Ernakulam</option>
+              <option value="306">Idukki</option>
+              <option value="297">Kannur</option>
+              <option value="295">Kasaragod</option>
+              <option value="298">Kollam</option>
+              <option value="304">Kottayam</option>
+              <option value="305">Kozhikode</option>
+              <option value="302">Malappuram</option>
+              <option value="308">Palakkad</option>
+              <option value="300">Pathanamthitta</option>
+              <option value="296" selected="selected">
+                Thiruvananthapuram
+              </option>
+              <option value="303">Thrissur</option>
+              <option value="299">Wayanad</option>
+            </ons-select>
+          </form>
+          <br>
+          <ons-button type="button" id="enquire_btn" modifier="large">
+            Run
+          </ons-button>
+          <ons-button type="button" id="stop_btn" modifier="large" style="background-color: red;"
+            >Stop</ons-button
+          >
+        </div>
+        <p class="date"></p>
+        <h3 class="result" style="text-align: center; background-color: white; padding: 16px; border-radius: 8px;"></h3>
+        <p class="runStatus"></p>
+      
+      </section>
+      <ons-bottom-toolbar>
+        <p style="text-align: center;">Developed by Ratheesh James</p>
+      </ons-bottom-toolbar>
+    </ons-page>
+  </body>
+</html>
