@@ -15,32 +15,10 @@ $(document).ready(function () {
   $("#stop_btn").hide();
   $("#bar").hide();
   // jQuery methods go here...
-
-  function notifyMe(data) {
-    // Let's check if the browser supports notifications
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
-
-    // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      var notification = new Notification(data);
-    }
-
-    // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then(function (permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          var notification = new Notification(data);
-        }
-      });
-    }
-    // At last, if the user has denied notifications, and you
-    // want to be respectful there is no need to bother them any more.
+  var audio = document.getElementById("notification"); 
+  function playAudio() { 
+    audio.play(); 
   }
-
   var vaccineData = "";
   var totalOccur = 0;
   var available = 0;
@@ -49,8 +27,7 @@ $(document).ready(function () {
     $("#enquire_btn").hide();
     $("#stop_btn").show();
     $("#bar").show();
-    var dist = $("#dist").val();
-    notifyMe("Notification Alerts are Enabled!");
+    var dist = $("#dist").val();    
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -88,12 +65,12 @@ $(document).ready(function () {
         var nAvailable = vaccineData.match(/"available_capacity":0/g).length;
         available = Math.abs(totalOccur - nAvailable);
         console.log("Available Centers = " + available);
-        if (available != 0) {
-          notifyMe("Vaccination Available on: " + dateVar);
+        if (available != 0) {          
           $(".result").text("Available");
           $(".result").css("background-color", "LightGreen");
           $(".date").text(dateVar);
           $(".result").append("<p>" + available + "</p>");
+          playAudio();
         } else {
           $(".result").text("Un Available");
           $(".result").css("background-color", "LightPink");
@@ -143,7 +120,7 @@ function showInstallPromotion () {
 function hideInstallPromotion () {
   $("#install_btn").hide();
 }
-document.getElementById("install_btn").addEventListener('click', async () => {
+window.addEventListener('click', async () => {
   // Hide the app provided install promotion
   hideInstallPromotion();
   // Show the install prompt
