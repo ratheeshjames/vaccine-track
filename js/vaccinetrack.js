@@ -9,16 +9,16 @@ if ("serviceWorker" in navigator) {
 }
 // Initialize deferredPrompt for use later to show browser install prompt.
 
-
 $(document).ready(function () {
   $("#install_btn").hide();
   $("#stop_btn").hide();
   $("#bar").hide();
   $(".result").hide();
+  $(".dateCurrent").hide();
   // jQuery methods go here...
-  var audio = document.getElementById("notification"); 
-  function playAudio() { 
-    audio.play(); 
+  var audio = document.getElementById("notification");
+  function playAudio() {
+    audio.play();
   }
   var vaccineData = "";
   var totalOccur = 0;
@@ -29,7 +29,8 @@ $(document).ready(function () {
     $("#stop_btn").show();
     $("#bar").show();
     $(".result").show();
-    var dist = $("#dist").val();    
+    $(".dateCurrent").show();
+    var dist = $("#dist").val();
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -39,7 +40,7 @@ $(document).ready(function () {
     var ddTemp = dd;
     runVaccine();
     var flag = 0;
-    interval = setInterval(runVaccine, 1000);
+    interval = setInterval(runVaccine, 3000);
     function runVaccine() {
       $(".runStatus").text("Running...");
       var dateVar = ddTemp + "-" + mm + "-" + yyyy;
@@ -51,24 +52,25 @@ $(document).ready(function () {
           "&date=" +
           "0" +
           dateVar;
+        $(".dateCurrent").text("0" + dateVar);
       } else {
         vaccineDataLink =
           "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict?district_id=" +
           dist +
           "&date=" +
           dateVar;
+        $(".dateCurrent").text(dateVar);
       }
 
       $.getJSON(vaccineDataLink, function (json) {
-        console.log("JSON Fetch succesful!!  Date:  " + dateVar);
         vaccineData = JSON.stringify(json);
         totalOccur = vaccineData.match(/slots/g).length;
-        console.log("Total Centers = " + totalOccur);
+
         var nAvailable = vaccineData.match(/"available_capacity":0/g).length;
-        console.log("Total Zero Centers = " + nAvailable);
+
         available = Math.abs(totalOccur - nAvailable);
-        console.log("Available Centers = " + available);
-        if (available != 0) {          
+
+        if (available != 0) {
           $(".result").text("Available");
           $(".result").css("background-color", "LightGreen");
           $(".date").text(dateVar);
@@ -78,12 +80,12 @@ $(document).ready(function () {
           $(".result").text("Un Available");
           $(".result").css("background-color", "LightPink");
         }
-      });      
+      });
       ddTemp++;
       flag++;
       if (ddTemp > 30) {
         ddTemp = 1;
-      }else {
+      } else {
         ddTemp = ddTemp;
       }
 
@@ -97,38 +99,38 @@ $(document).ready(function () {
   });
 
   $("#stop_btn").click(function (e) {
-    console.log("Stop Clicked");
     clearInterval(interval);
     $("#stop_btn").hide();
     $("#enquire_btn").show();
     $("#bar").hide();
     $(".result").hide();
-    $(".result").text(" ");    
+    $(".result").text(" ");
     $(".date").text(" ");
     $(".runStatus").text("Stopped");
+    $(".dateCurrent").hide();
 
     e.preventDefault();
   });
 });
 let deferredPrompt;
 
-window.addEventListener('beforeinstallprompt', (e) => {
+window.addEventListener("beforeinstallprompt", (e) => {
   // Prevent the mini-infobar from appearing on mobile
   e.preventDefault();
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
   // Update UI notify the user they can install the PWA
-  showInstallPromotion();  
+  showInstallPromotion();
   // Optionally, send analytics event that PWA install promo was shown.
   console.log(`'beforeinstallprompt' event was fired.`);
 });
-function showInstallPromotion () {
+function showInstallPromotion() {
   $("#install_btn").show();
 }
-function hideInstallPromotion () {
+function hideInstallPromotion() {
   $("#install_btn").hide();
 }
-window.addEventListener('click', async () => {
+window.addEventListener("click", async () => {
   // Hide the app provided install promotion
   hideInstallPromotion();
   // Show the install prompt
@@ -141,11 +143,11 @@ window.addEventListener('click', async () => {
   deferredPrompt = null;
 });
 
-window.addEventListener('appinstalled', () => {
+window.addEventListener("appinstalled", () => {
   // Hide the app-provided install promotion
   hideInstallPromotion();
   // Clear the deferredPrompt so it can be garbage collected
   deferredPrompt = null;
   // Optionally, send analytics event to indicate successful install
-  console.log('PWA was installed');
+  console.log("PWA was installed");
 });
