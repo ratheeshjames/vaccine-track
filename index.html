@@ -16,27 +16,27 @@
       rel="stylesheet"
       href="https://unpkg.com/onsenui/css/onsen-css-components.min.css"
     />
-    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>  
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/vaccinetrack.js"></script>
     <link rel="manifest" href="manifest.json" />
-<!-- ios support -->
-<link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
-<link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
-<link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
-<link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
-<link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
-<link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
-<link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
-<link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
-<meta name="apple-mobile-web-app-status-bar" content="#db4938" />
-<meta name="theme-color" content="#db4938" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+    <meta name="theme-color" content="#db4938" />
   </head>
 
   <body>
     <audio id="notification">
-      <source src="audio/notification.ogg" type="audio/ogg">
-      <source src="audio/notification.mp3" type="audio/mpeg">
+      <source src="audio/notification.ogg" type="audio/ogg" />
+      <source src="audio/notification.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
     <ons-page id="main-page">
@@ -45,10 +45,10 @@
         <div class="right">
           <ons-toolbar-button id="install_btn">INSTALL</ons-toolbar-button>
         </div>
-      </ons-toolbar>      
+      </ons-toolbar>
       <ons-progress-bar indeterminate id="bar"></ons-progress-bar>
       <section style="padding: 16px">
-        <!-- Your page content here. -->        
+        <!-- Your page content here. -->
         <p>Select District</p>
         <p></p>
         <div>
@@ -72,22 +72,27 @@
               <option value="299">Wayanad</option>
             </ons-select>
           </form>
-          <br>
+          <br />
           <ons-button type="button" id="enquire_btn" modifier="large">
             Run
           </ons-button>
-          <ons-button type="button" id="stop_btn" modifier="large" style="background-color: red;"
+          <ons-button
+            type="button"
+            id="stop_btn"
+            modifier="large"
+            style="background-color: red"
             >Stop</ons-button
           >
         </div>
         <p class="date"></p>
-        <h3 class="result" style="text-align: center;  padding: 16px; border-radius: 8px;">   </h3>
+        <h3
+          class="result"
+          style="text-align: center; padding: 16px; border-radius: 8px"
+        ></h3>
         <p class="runStatus"></p>
-        <p class="dateCurrent"></p>
-      
       </section>
       <ons-bottom-toolbar>
-        <p style="text-align: center;">Developed by Ratheesh James</p>        
+        <p style="text-align: center">Developed by Ratheesh James</p>
       </ons-bottom-toolbar>
     </ons-page>
   </body>
