@@ -16,11 +16,11 @@ importScripts(
   });
   const cacheName = "vaccinecache";
   const staticAssets = [    
-    "/vaccine-track/index.html",
-    "/vaccine-track/js/vaccinetrack.js",
-    "/vaccine-track/js/jquery-3.6.0.min.js", 
-    "/vaccine-track/audio/notification.mp3",  
-    "/vaccine-track/audio/notification.ogg", 
+    "/index.html",
+    "js/vaccinetrack.js",
+    "js/jquery-3.6.0.min.js", 
+    "audio/notification.mp3",  
+    "audio/notification.ogg", 
   ]
   /*
     Enable precaching
