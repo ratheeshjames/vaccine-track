@@ -78,11 +78,16 @@ $(document).ready(function () {
           $(".result").text("Un Available");
           $(".result").css("background-color", "LightPink");
         }
-      });
+      });      
       ddTemp++;
       flag++;
+      if (ddTemp > 30) {
+        ddTemp = 1;
+      }else {
+        ddTemp = ddTemp;
+      }
 
-      if (flag > 6) {
+      if (flag > 15) {
         ddTemp = dd;
         flag = 0;
       } else {
