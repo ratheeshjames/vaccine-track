@@ -1,10 +1,11 @@
+// Register service worker to control making site work offline
+
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function() {
-    navigator.serviceWorker
-      .register("/serviceWorker.js")
-      .then(res => console.log("service worker registered"))
-      .catch(err => console.log("service worker not registered", err))
-  })
+  navigator.serviceWorker
+    .register("/vaccine-track/service-worker.js")
+    .then(function () {
+      console.log("Service Worker Registered");
+    });
 }
 $(document).ready(function () {
   $("#stop_btn").hide();
