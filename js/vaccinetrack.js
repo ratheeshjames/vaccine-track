@@ -66,7 +66,7 @@ $(document).ready(function () {
         vaccineData = JSON.stringify(json);
         totalOccur = vaccineData.match(/slots/g).length;
 
-        var nAvailable = vaccineData.match(/"available_capacity":0/g).length;
+        var nAvailable = vaccineData.match(/"available_capacity_dose1:0"/g).length;
 
         available = Math.abs(totalOccur - nAvailable);
 
@@ -91,7 +91,7 @@ $(document).ready(function () {
         ddTemp = ddTemp;
       }
 
-      if (flag > 15) {
+      if (flag > 2) {
         ddTemp = dd;
         flag = 0;
       } else {
